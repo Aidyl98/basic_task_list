@@ -26,6 +26,13 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     fetch();
   }
 
+  void edit(ItemModel item, String text) {
+    add(
+      ItemEditEvet(item, text),
+    );
+    fetch();
+  }
+
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {
     if (event is ItemFetchEvent) {
@@ -46,6 +53,9 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     }
     if (event is ItemCreateEvet) {
       itemRepository.addItem(event.task);
+    }
+    if (event is ItemEditEvet) {
+      itemRepository.editItem(event.itemModel, event.text);
     }
   }
 }
