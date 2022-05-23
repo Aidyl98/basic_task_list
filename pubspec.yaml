@@ -17,6 +17,9 @@ dependencies:
   dio: ^4.0.6
   json_annotation: ^4.4.0
 
+  # State Management.
+  flutter_bloc: ^7.0.1
+
   #Utils.
   cupertino_icons: ^1.0.2
   rich_text_controller: ^1.4.0
