@@ -1,5 +1,4 @@
-import 'package:basic_task_list/ui/utils/reg_exp_utils.dart';
-import 'package:basic_task_list/ui/widget/tag_widget.dart';
+import 'package:basic_task_list/ui/ui_exporter.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
