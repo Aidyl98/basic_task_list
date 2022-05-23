@@ -79,8 +79,7 @@ class BodyWidget extends StatelessWidget {
                 splashColor: Theme.of(context).colorScheme.background,
                 tooltip: "Try to fetch the data.",
                 onPressed: () {
-                  BlocProvider.of<ItemBloc>(context)
-                      .add(const ItemFetchEvent());
+                  BlocProvider.of<ItemBloc>(context).fetch();
                 },
                 icon: const Icon(
                   Icons.refresh,
@@ -114,6 +113,8 @@ class BodyWidget extends StatelessWidget {
                     collapsed: const TextFieldCollapsedWidget(),
                     expanded: TextFieldExpandeddWidget(
                       expandableController: expandableController,
+                      functionCreate: (text) =>
+                          BlocProvider.of<ItemBloc>(context).create(text),
                     ),
                     builder: (_, collapsed, expanded) {
                       return Expandable(
