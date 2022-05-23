@@ -7,13 +7,11 @@ part of 'item_model.dart';
 // **************************************************************************
 
 ItemModel _$ItemModelFromJson(Map<String, dynamic> json) => ItemModel(
-      id: json['id'] as int,
-      text: json['text'] as String,
-      isCheck: json['isCheck'] as bool,
+      taskId: json['taskId'] as int,
+      taskDescription: json['taskDescription'] as String,
     );
 
 Map<String, dynamic> _$ItemModelToJson(ItemModel instance) => <String, dynamic>{
-      'id': instance.id,
-      'text': instance.text,
-      'isCheck': instance.isCheck,
+      'taskId': instance.taskId,
+      'taskDescription': instance.taskDescription,
     };
