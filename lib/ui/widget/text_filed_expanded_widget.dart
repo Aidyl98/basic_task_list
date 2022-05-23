@@ -3,13 +3,19 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:rich_text_controller/rich_text_controller.dart';
 
+// ignore: must_be_immutable
 class TextFieldExpandeddWidget extends StatefulWidget {
   final ExpandableController expandableController;
   final void Function(String text) functionCreate;
-  const TextFieldExpandeddWidget({
+  String textEdit;
+  bool isEditing;
+
+  TextFieldExpandeddWidget({
     Key? key,
     required this.expandableController,
     required this.functionCreate,
+    this.textEdit = "",
+    this.isEditing = false,
   }) : super(key: key);
 
   @override
@@ -38,6 +44,7 @@ class _ExpandedWidgetState extends State<TextFieldExpandeddWidget> {
       },
       onMatch: (List<String> matches) {},
     );
+    textFieldController.text = widget.textEdit;
     super.initState();
   }
 
@@ -47,13 +54,13 @@ class _ExpandedWidgetState extends State<TextFieldExpandeddWidget> {
     final showIcons = size.width < 600;
     return Card(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(4.0),
         child: Column(
           children: [
             TextField(
               onChanged: (text) {
                 setState(() {
-                  if (text.isEmpty) {
+                  if (text.isEmpty || text.compareTo(widget.textEdit) == 0) {
                     isTexting = false;
                   } else {
                     isTexting = true;
@@ -141,11 +148,17 @@ class _ExpandedWidgetState extends State<TextFieldExpandeddWidget> {
                       },
                       child: showIcons
                           ? Icon(
-                              isTexting ? Icons.add : Icons.close,
+                              isTexting
+                                  ? widget.isEditing
+                                      ? Icons.save
+                                      : Icons.add
+                                  : Icons.close,
                               size: size.width / 15,
                             )
                           : isTexting
-                              ? const Text("Add")
+                              ? widget.isEditing
+                                  ? const Text("Guardar")
+                                  : const Text("Add")
                               : const Text("Ok"),
                     ),
                   ],

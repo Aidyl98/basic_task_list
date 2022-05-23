@@ -64,7 +64,9 @@ class BodyWidget extends StatelessWidget {
         // Loading Data
         if (itemState is ItemInitial ||
             itemState is ItemLoadingState && items.isEmpty) {
-          return WidgetUtils.buildCircularProgressIndicator(context);
+          return Center(
+            child: WidgetUtils.buildCircularProgressIndicator(context),
+          );
           // Add the fetched data to the list.
         } else if (itemState is ItemSuccessState) {
           items.clear();
@@ -101,43 +103,42 @@ class BodyWidget extends StatelessWidget {
           );
         }
         return SingleChildScrollView(
-          child: ExpandableNotifier(
-            controller: expandableController,
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                ScrollOnExpand(
-                  scrollOnExpand: true,
-                  scrollOnCollapse: false,
-                  child: ExpandablePanel(
-                    theme: const ExpandableThemeData(
-                      headerAlignment: ExpandablePanelHeaderAlignment.center,
-                      tapBodyToExpand: true,
-                    ),
-                    collapsed: const TextFieldCollapsedWidget(),
-                    expanded: TextFieldExpandeddWidget(
-                      expandableController: expandableController,
-                      functionCreate: (text) =>
-                          BlocProvider.of<ItemBloc>(context).create(text),
-                    ),
-                    builder: (_, collapsed, expanded) {
-                      return Expandable(
-                        collapsed: collapsed,
-                        expanded: expanded,
-                        theme: const ExpandableThemeData(crossFadePoint: 0),
-                      );
-                    },
-                  ),
+          child: Column(
+            children: [
+              ExpandableWidget(
+                collapsed: const TextFieldCollapsedWidget(),
+                expanded: TextFieldExpandeddWidget(
+                  expandableController: expandableController,
+                  functionCreate: (text) =>
+                      BlocProvider.of<ItemBloc>(context).create(text),
                 ),
-                Column(
-                  children: List.generate(
-                    items.length,
-                    (index) => ListTileWidget(
-                        textList: items[index].taskDescription.split(" ")),
-                  ),
-                )
-              ],
-            ),
+                expandableController: expandableController,
+              ),
+              Column(
+                children: List.generate(items.length, (index) {
+                  final editExpandableController = ExpandableController(
+                    initialExpanded: false,
+                  );
+
+                  return ExpandableWidget(
+                    collapsed: ListTileWidget(
+                      textList: items[index].taskDescription.split(" "),
+                      expandableController: editExpandableController,
+                    ),
+                    expanded: TextFieldExpandeddWidget(
+                      key: Key("$index"),
+                      expandableController: editExpandableController,
+                      isEditing: true,
+                      textEdit: items[index].taskDescription,
+                      functionCreate: (text) =>
+                          BlocProvider.of<ItemBloc>(context)
+                              .edit(items[index], text),
+                    ),
+                    expandableController: editExpandableController,
+                  );
+                }),
+              )
+            ],
           ),
         );
       },
