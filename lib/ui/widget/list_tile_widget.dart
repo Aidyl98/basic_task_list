@@ -1,15 +1,19 @@
-import 'package:basic_task_list/ui/ui_exporter.dart';
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+
+import 'package:basic_task_list/ui/ui_exporter.dart';
 
 // ignore: must_be_immutable
 class ListTileWidget extends StatelessWidget {
   final List<String> textList;
+  ExpandableController expandableController;
   int email = 1;
   int link = 1;
 
   ListTileWidget({
     Key? key,
     required this.textList,
+    required this.expandableController,
   }) : super(key: key);
 
   @override
@@ -29,7 +33,9 @@ class ListTileWidget extends StatelessWidget {
       value: false,
       controlAffinity: ListTileControlAffinity.leading,
       contentPadding: EdgeInsets.zero,
-      onChanged: (value) {},
+      onChanged: (value) {
+        expandableController.toggle();
+      },
     );
   }
 
