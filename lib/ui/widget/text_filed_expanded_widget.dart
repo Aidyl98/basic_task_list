@@ -5,9 +5,11 @@ import 'package:rich_text_controller/rich_text_controller.dart';
 
 class TextFieldExpandeddWidget extends StatefulWidget {
   final ExpandableController expandableController;
+  final void Function(String text) functionCreate;
   const TextFieldExpandeddWidget({
     Key? key,
     required this.expandableController,
+    required this.functionCreate,
   }) : super(key: key);
 
   @override
@@ -128,8 +130,11 @@ class _ExpandedWidgetState extends State<TextFieldExpandeddWidget> {
                         }),
                       ),
                       onPressed: () {
-                        if (widget.expandableController.expanded) {
+                        if (widget.expandableController.expanded &&
+                            !isTexting) {
                           widget.expandableController.toggle();
+                        } else {
+                          widget.functionCreate(textFieldController.text);
                         }
                       },
                       child: showIcons
