@@ -7,3 +7,4 @@ export 'list_tile_widget.dart';
 export 'tag_widget.dart';
 export 'text_field_collapsed_widget.dart';
 export 'text_filed_expanded_widget.dart';
+export 'widget_utils.dart';
