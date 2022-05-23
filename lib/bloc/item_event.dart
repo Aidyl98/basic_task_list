@@ -8,3 +8,8 @@ abstract class ItemEvent {
 class ItemFetchEvent extends ItemEvent {
   const ItemFetchEvent();
 }
+
+class ItemCreateEvet extends ItemEvent {
+  final String task;
+  const ItemCreateEvet(this.task);
+}
