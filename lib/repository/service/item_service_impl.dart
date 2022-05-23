@@ -10,10 +10,10 @@ class ItemServiceImplementation extends ItemService {
       List<Map<String, dynamic>> allItems = [];
 
       // Get object info.
-      var response = await _dio.get(ApiConstants.baseURL);
+      var response = await _dio.get(ApiConstants.findAll);
 
       allItems
-          .addAll(List<Map<String, dynamic>>.from(response.data["results"]));
+          .addAll(List<Map<String, dynamic>>.from(response.data));
 
       return List<ItemModel>.from(allItems.map((x) => ItemModel.fromJson(x)));
     } on DioError catch (exc) {
