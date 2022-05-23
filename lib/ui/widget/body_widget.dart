@@ -27,6 +27,7 @@ class BodyWidget extends StatelessWidget {
                 context: context,
                 size: size,
                 textAlign: TextAlign.center,
+                color: Colors.white,
               ),
             ),
           );
@@ -39,6 +40,7 @@ class BodyWidget extends StatelessWidget {
                 context: context,
                 size: size,
                 textAlign: TextAlign.center,
+                color: Colors.white,
               ),
             ),
           );
@@ -51,6 +53,7 @@ class BodyWidget extends StatelessWidget {
                 context: context,
                 size: size,
                 textAlign: TextAlign.center,
+                color: Colors.white,
               ),
             ),
           );
@@ -64,6 +67,7 @@ class BodyWidget extends StatelessWidget {
           return WidgetUtils.buildCircularProgressIndicator(context);
           // Add the fetched data to the list.
         } else if (itemState is ItemSuccessState) {
+          items.clear();
           items.addAll(itemState.item);
           ScaffoldMessenger.of(context).clearSnackBars();
           // Error View.
