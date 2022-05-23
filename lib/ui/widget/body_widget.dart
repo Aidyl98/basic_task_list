@@ -1,6 +1,4 @@
-import 'package:basic_task_list/ui/widget/list_tile_widget.dart';
-import 'package:basic_task_list/ui/widget/text_field_collapsed_widget.dart';
-import 'package:basic_task_list/ui/widget/text_filed_expanded_widget.dart';
+import 'package:basic_task_list/ui/widget/widget_exporter.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
