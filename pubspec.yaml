@@ -14,6 +14,7 @@ dependencies:
 
   # Api Rest: dio client generator, if something change, run: ` flutter pub run build_runner watch`.
   retrofit: ^3.0.1+1
+  dio: ^4.0.6
   json_annotation: ^4.4.0
 
   #Utils.
