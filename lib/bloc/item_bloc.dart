@@ -19,6 +19,13 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
     add(const ItemFetchEvent());
   }
 
+  void create(String task) {
+    add(
+      ItemCreateEvet(task),
+    );
+    fetch();
+  }
+
   @override
   Stream<ItemState> mapEventToState(ItemEvent event) async* {
     if (event is ItemFetchEvent) {
@@ -36,6 +43,9 @@ class ItemBloc extends Bloc<ItemEvent, ItemState> {
           error: exc.toString().replaceAll("Exception: ", ""),
         );
       }
+    }
+    if (event is ItemCreateEvet) {
+      itemRepository.addItem(event.task);
     }
   }
 }
