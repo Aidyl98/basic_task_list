@@ -37,4 +37,11 @@ class ItemServiceImplementation extends ItemService {
     // Post object info.
     await _dio.post(ApiConstants.addItem, data: item.toJson());
   }
+
+  @override
+  void editItem(ItemModel item, String text) async {
+    // Put object info.
+    ItemModel itemTask = ItemModel(taskId: item.taskId, taskDescription: text);
+    await _dio.put(ApiConstants.editItem, data: itemTask.toJson());
+  }
 }
