@@ -1,3 +1,4 @@
+import 'package:basic_task_list/app_exporter.dart';
 import 'package:basic_task_list/repository/repository_exporter.dart';
 import 'package:dio/dio.dart';
 
@@ -12,8 +13,7 @@ class ItemServiceImplementation extends ItemService {
       // Get object info.
       var response = await _dio.get(ApiConstants.findAll);
 
-      allItems
-          .addAll(List<Map<String, dynamic>>.from(response.data));
+      allItems.addAll(List<Map<String, dynamic>>.from(response.data));
 
       return List<ItemModel>.from(allItems.map((x) => ItemModel.fromJson(x)));
     } on DioError catch (exc) {
@@ -28,5 +28,13 @@ class ItemServiceImplementation extends ItemService {
         throw Exception("Couldn't fetch tasks. Is the device online?");
       }
     }
+  }
+
+  @override
+  void addItem(String newTask) async {
+    ItemModel item = ItemModel(taskId: 0, taskDescription: newTask);
+
+    // Post object info.
+    await _dio.post(ApiConstants.addItem, data: item.toJson());
   }
 }
