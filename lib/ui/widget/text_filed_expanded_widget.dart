@@ -135,6 +135,8 @@ class _ExpandedWidgetState extends State<TextFieldExpandeddWidget> {
                           widget.expandableController.toggle();
                         } else {
                           widget.functionCreate(textFieldController.text);
+                          textFieldController.clear();
+                          widget.expandableController.toggle();
                         }
                       },
                       child: showIcons
